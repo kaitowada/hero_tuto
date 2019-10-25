@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nuxt:
+    build: ./nuxt
+    container_name: 'hero_nuxt'
+    command: yarn dev
+    volumes:
+      - ./nuxt:/usr/my_projects
+      - ./nuxt/node_modules:/usr/my_projects/node_modules
+    ports:
+      - '5600:3000'
+  laravel:
+    image: palladion/pl-laravel
+    command: php artisan serve --host 0.0.0.0 --port=3000
+    ports:
+      - 4000:3000
+    volumes:
+      - ./laravel:/usr/my_projects
