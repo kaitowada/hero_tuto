@@ -8,6 +8,27 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
+        <template v-if="login">
+          <v-list-item class="item-style" to="/login">
+            <v-list-item-action>
+              <v-icon>
+                mdi-account
+              </v-icon>
+            </v-list-item-action>
+            <v-list-item-title>ログイン</v-list-item-title>
+          </v-list-item>
+        </template>
+        <template v-else>
+          <v-list-item class="item-style" to="/logout">
+            <v-list-item-action>
+              <v-icon>
+                mdi-logout-variant
+              </v-icon>
+            </v-list-item-action>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item>
+        </template>
+        <v-divider></v-divider>
         <v-list-item class="item-style" to="/">
           <v-list-item-action>
             <v-icon>
@@ -22,7 +43,7 @@
         <v-list-item class="item-style" to="/hero/list">
           <v-list-item-action>
             <v-icon>
-              mdi-format_list_bulleted
+              mdi-format-list-bulleted
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>ヒーローリスト</v-list-item-title>
@@ -52,7 +73,8 @@ export default {
   data: () => ({
     clipped: false,
     drawer: false,
-    fixed: false
+    fixed: false,
+    login: true
   }),
   computed: {},
   watch: {},
