@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use DateTime;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -63,10 +65,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $date = new DateTime();
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'created_at' => $date->format('Y-m-d H:i:s'),
+            'updated_at' => $date->format('Y-m-d H:i:s'),
         ]);
     }
 }
