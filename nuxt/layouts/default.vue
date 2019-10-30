@@ -69,14 +69,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     clipped: false,
     drawer: false,
     fixed: false,
-    login: true
+    login: false
   }),
-  computed: {},
+  computed: {
+    ...mapGetters('auth', { getLogin: 'getLoginState' })
+  },
   watch: {},
   async created() {},
   methods: {

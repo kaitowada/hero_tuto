@@ -17,10 +17,11 @@
 </template>
 
 <script>
+// import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {},
   data: () => ({
-    heros: [{ id: 1, name: 'hoge' }, { id: 2, name: 'fuga' }]
+    heros: []
   }),
   computed: {},
   watch: {},

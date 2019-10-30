@@ -13,17 +13,19 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(["middleware" => "api"], function () {
-// 認証が必要ないメソッド
-    Route::post('/login', 'Auth\LoginController@login');
-    Route::group(['middleware' => 'auth:api'], function () {
-        // 認証が必要なメソッド
-        Route::post('/logout', 'Auth\LoginController@logout');
-        Route::get('/hero', 'Api\HeroController@index');
-        Route::get('/hero/{id}', 'Api\HeroController@show');
-        Route::post('/hero/new', 'Api\HeroController@store');
-        Route::get('/user', function (Request $request) {
-            return $request->user();
+Route::group(["middleware" => "cors"], function () {
+    Route::group(["middleware" => "api"], function () {
+    // 認証が必要ないメソッド
+        Route::match(["post", "options"], '/login', 'Auth\LoginController@login');
+        Route::group(['middleware' => 'auth:api'], function () {
+            // 認証が必要なメソッド
+            Route::match(["post", "options"], '/logout', 'Auth\LoginController@logout');
+            Route::match(["get", "options"], '/hero', 'Api\HeroController@index');
+            Route::match(["get", "options"], '/hero/{id}', 'Api\HeroController@show');
+            Route::match(["post", "options"], '/hero/new', 'Api\HeroController@store');
+            Route::match(["get", "options"], '/user', function (Request $request) {
+                return $request->user();
+            });
         });
     });
 });
