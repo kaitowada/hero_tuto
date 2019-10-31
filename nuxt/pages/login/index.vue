@@ -37,16 +37,23 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {},
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    loginState: false
   }),
   computed: {},
   watch: {},
-  async created() {},
+  created() {
+    this.loginState = this.getLogin
+    console.log(this.loginState)
+  },
   methods: {
+    ...mapGetters('auth', { getLogin: 'getLoginState' }),
+    ...mapActions('auth', { authLogin: 'login' }),
     goHeroList() {
       console.log('HeroList')
       this.$router.push({ path: '/hero/list' })
@@ -55,8 +62,14 @@ export default {
       console.log('NewHero')
       this.$router.push({ path: '/hero/new' })
     },
-    login() {
-      console.log('login')
+    async login() {
+      const data = {
+        email: this.email,
+        password: this.password
+      }
+      await this.authLogin({ data, saveLoginState: this.saveLoginState })
+      this.loginState = this.getLogin()
+      console.log('this.loginstate', this.loginState)
     }
   }
 }

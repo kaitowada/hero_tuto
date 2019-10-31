@@ -10,13 +10,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   components: {},
   data: () => ({}),
   computed: {},
   watch: {},
-  async created() {},
+  async created() {
+    await this.heroLists()
+  },
   methods: {
+    ...mapActions('hero', { heroLists: 'heroList' }),
     goHeroList() {
       console.log('HeroList')
       this.$router.push({ path: '/hero/list' })

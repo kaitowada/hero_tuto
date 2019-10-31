@@ -1,7 +1,7 @@
 <template>
   <v-layout wrap column align-center>
     <v-flex
-      v-for="hero in heros"
+      v-for="hero in heroList"
       :key="hero.id"
       class="card-layout"
       xs12
@@ -17,12 +17,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   components: {},
   data: () => ({
-    heros: [{ id: 1, name: 'hoge' }, { id: 2, name: 'fuga' }]
+    heroes: []
   }),
-  computed: {},
+  computed: {
+    ...mapGetters('hero', ['heroList'])
+  },
   watch: {},
   async created() {},
   methods: {

@@ -8,7 +8,7 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
-        <template v-if="login">
+        <template v-if="getLoginState">
           <v-list-item class="item-style" to="/login">
             <v-list-item-action>
               <v-icon>
@@ -69,14 +69,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     clipped: false,
     drawer: false,
     fixed: false,
-    login: true
+    login: false
   }),
-  computed: {},
+  computed: {
+    ...mapGetters('auth', ['getLoginState'])
+  },
   watch: {},
   async created() {},
   methods: {
