@@ -2,7 +2,7 @@
 
 export default function({ $axios }) {
   $axios.setHeader('X-Requested-With', 'XMLHttpRequest')
-  const accessToken =
-    'rXHO3LUXsQWK7lPF3rWZHFkDPonJoOiewlqT7XtstcoliAtFZASa6FyfgGw5klNKZ1uuf5YaC5WzIKvH'
+  console.log(localStorage.accessToken)
+  const accessToken = localStorage.accessToken
   $axios.setToken(accessToken, 'Bearer')
 }

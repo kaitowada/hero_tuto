@@ -1,9 +1,3 @@
-import {
-  setAccessToken as utilSetAccessToken,
-  setUser as utilSetUser,
-  logout as utilLogout
-} from '~/utils/auth'
-
 export const state = () => ({
   user: {},
   apiToken: null,
@@ -13,13 +7,13 @@ export const state = () => ({
 export const mutations = {
   setUser(state, user) {
     state.user = user
-    utilSetUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
   },
 
   setAccessToken(state, apiToken) {
     state.apiToken = apiToken
     // this.$axios.setHeader('access-token', accessToken)
-    utilSetAccessToken(apiToken)
+    localStorage.setItem('accessToken', apiToken)
   },
   setLoginState(state, loginStatus) {
     state.loginState = loginStatus
@@ -28,6 +22,9 @@ export const mutations = {
     state.user = null
     state.accessToken = null
     state.loginState = false
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
+    localStorage.clear()
   }
 }
 
@@ -53,7 +50,6 @@ export const actions = {
     }
   },
   logout({ commit }, isReload = true) {
-    utilLogout()
     commit('unsetAuthInfo')
     if (isReload) location.reload()
   },
@@ -72,5 +68,8 @@ export const getters = {
   getLoginState(state) {
     console.log('loginstate', state.loginState)
     return state.loginState
+  },
+  getAuthUser(state) {
+    return localStorage.user
   }
 }

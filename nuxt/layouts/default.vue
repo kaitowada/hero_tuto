@@ -8,7 +8,7 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
-        <template v-if="false">
+        <template v-if="true">
           <v-list-item class="item-style" to="/login">
             <v-list-item-action>
               <v-icon>

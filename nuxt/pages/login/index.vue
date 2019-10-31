@@ -67,8 +67,6 @@ export default {
         password: this.password
       }
       await this.authLogin({ data, saveLoginState: this.saveLoginState })
-      this.loginState = this.getLogin()
-      console.log('this.loginstate', this.loginState)
     }
   }
 }
