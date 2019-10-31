@@ -8,7 +8,7 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
-        <template v-if="login">
+        <template v-if="getLoginState">
           <v-list-item class="item-style" to="/login">
             <v-list-item-action>
               <v-icon>
@@ -78,7 +78,7 @@ export default {
     login: false
   }),
   computed: {
-    ...mapGetters('auth', { getLogin: 'getLoginState' })
+    ...mapGetters('auth', ['getLoginState'])
   },
   watch: {},
   async created() {},

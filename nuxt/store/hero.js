@@ -10,22 +10,25 @@ export const mutations = {
 }
 
 export const actions = {
-  async heroList({ dispatch }) {
-    try {
-      const response = await this.$axios.$get('http://localhost:4000/api/hero')
-      console.log('response', response)
-      dispatch('setHeroList', response)
-    } catch (error) {
-      return Promise.reject(error)
-    }
+  async heroList({ dispatch, commit }) {
+    await this.$axios
+      .$get('http://localhost:4000/api/hero')
+      .then((response) => {
+        console.log('heroList', response)
+        commit('setHeroList', response)
+        // return response
+      })
   },
-  setHeroList({ commit }, heroList) {
-    commit(heroList)
+
+  async newHero({ dispatch, commit }, { data }) {
+    console.log('data', data)
+    await this.$axios.$post('http://localhost:4000/api/hero/new', data)
   }
 }
 
 export const getters = {
-  getHeroList(state) {
+  heroList(state) {
+    console.log('state.heroList', state.heroList)
     return state.heroList
   }
 }

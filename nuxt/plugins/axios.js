@@ -1,11 +1,8 @@
-import { getAccessTokenFromLocalStorage } from '~/utils/auth'
+// import { getAccessTokenFromLocalStorage } from '~/utils/auth'
 
 export default function({ $axios }) {
   $axios.setHeader('X-Requested-With', 'XMLHttpRequest')
-
-  if (getAccessTokenFromLocalStorage()) {
-    const accessToken =
-      'ZPsHv4R3Ui3Ponb392Mxi8dGpcUlag6LVllwYcbCL865xbk2lbNFLXM3JaycFlqiWo4sHuQUl5n3nNxv'
-    $axios.setToken('api_token', accessToken)
-  }
+  // const accessToken =
+  //   'QhlcTITzbmaZO7cO4rLtbHWrlZ0GbMWcnT16s8gZH8KjsXovqVAdovqMw9AFW3JrOrWJv5UcVGlxSHMm'
+  // $axios.setToken('Bearer', accessToken)
 }

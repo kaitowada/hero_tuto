@@ -17,8 +17,8 @@
         </v-layout>
         <v-layout row wrap mt3>
           <v-flex>
-            <v-btn class="card-layout" @click="newHero">
-              更新
+            <v-btn class="card-layout" @click="addNewHero">
+              追加
             </v-btn>
           </v-flex>
         </v-layout>
@@ -28,17 +28,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   components: {},
   data: () => ({
-    hero: { id: 1, name: 'hoge' }
+    hero: { id: '', name: '' }
   }),
   computed: {},
   watch: {},
   async created() {},
   methods: {
-    newHero() {
-      console.log('updateName')
+    ...mapActions('hero', ['newHero']),
+    async addNewHero() {
+      const data = {
+        name: this.hero.name
+      }
+      console.log('hero.name', this.hero.name)
+      await this.newHero({ data })
+      this.$router.push({ path: '/' })
     }
   }
 }
