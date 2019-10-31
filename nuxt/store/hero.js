@@ -10,7 +10,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async heroList({ dispatch, commit }) {
+  async heroList({ commit }) {
     await this.$axios
       .$get('http://localhost:4000/api/hero')
       .then((response) => {

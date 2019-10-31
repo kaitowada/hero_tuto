@@ -8,7 +8,7 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
-        <template v-if="getLoginState">
+        <template v-if="false">
           <v-list-item class="item-style" to="/login">
             <v-list-item-action>
               <v-icon>

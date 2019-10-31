@@ -20,11 +20,11 @@ Route::group(["middleware" => "cors"], function () {
         Route::match(["post", "options"], '/login', 'Auth\LoginController@login');
         Route::match(["post", "options"], '/logout', 'Auth\LoginController@logout');
         Route::match(["get", "options"], '/hero/{id}', 'Api\HeroController@show');
-        Route::match(["post", "options"], '/hero/new', 'Api\HeroController@store');
-        Route::match(["get", "options"], '/user', function (Request $request) {
-
+            
         Route::group(['middleware' => 'auth:api'], function () {
             // 認証が必要なメソッド
+            Route::match(["post", "options"], '/hero/new', 'Api\HeroController@store');
+            Route::match(["get", "options"], '/user', function (Request $request) {
                 return $request->user();
             });
         });

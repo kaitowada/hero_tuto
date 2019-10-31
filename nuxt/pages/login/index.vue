@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   components: {},
   data: () => ({
@@ -52,7 +52,6 @@ export default {
     console.log(this.loginState)
   },
   methods: {
-    ...mapGetters('auth', { getLogin: 'getLoginState' }),
     ...mapActions('auth', { authLogin: 'login' }),
     goHeroList() {
       console.log('HeroList')
