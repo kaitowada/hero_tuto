@@ -42,13 +42,11 @@ export default {
   components: {},
   data: () => ({
     email: '',
-    password: '',
-    loginState: false
+    password: ''
   }),
   computed: {},
   watch: {},
   created() {
-    this.loginState = this.getLogin
     console.log(this.loginState)
   },
   methods: {

@@ -8,7 +8,17 @@
           >
         </v-list-item-content>
         <v-divider></v-divider>
-        <template v-if="true">
+        <template v-if="getLoginState">
+          <v-list-item class="item-style" @click="goLogout">
+            <v-list-item-action>
+              <v-icon>
+                mdi-logout-variant
+              </v-icon>
+            </v-list-item-action>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item>
+        </template>
+        <template v-else>
           <v-list-item class="item-style" to="/login">
             <v-list-item-action>
               <v-icon>
@@ -16,16 +26,6 @@
               </v-icon>
             </v-list-item-action>
             <v-list-item-title>ログイン</v-list-item-title>
-          </v-list-item>
-        </template>
-        <template v-else>
-          <v-list-item class="item-style" to="/logout">
-            <v-list-item-action>
-              <v-icon>
-                mdi-logout-variant
-              </v-icon>
-            </v-list-item-action>
-            <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item>
         </template>
         <v-divider></v-divider>
@@ -69,22 +69,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data: () => ({
     clipped: false,
     drawer: false,
     fixed: false,
-    login: false
+    login: false,
+    user: {}
   }),
   computed: {
-    ...mapGetters('auth', ['getLoginState'])
+    ...mapGetters('auth', ['getLoginState', 'getAuthUser'])
   },
   watch: {},
   async created() {},
   methods: {
+    ...mapActions('auth', { authLogout: 'logout' }),
     goRoot() {
       this.$router.push({ path: '/' })
+    },
+    async goLogout() {
+      await this.authLogout(this.user)
+      this.$router.push({ path: '/login' })
     }
   }
 }

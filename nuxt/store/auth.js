@@ -14,6 +14,8 @@ export const mutations = {
     state.apiToken = apiToken
     // this.$axios.setHeader('access-token', accessToken)
     localStorage.setItem('accessToken', apiToken)
+    this.$axios.setToken(localStorage.getItem('accessToken'), 'Bearer')
+    console.log('setAccessToken', localStorage.accessToken)
   },
   setLoginState(state, loginStatus) {
     state.loginState = loginStatus
@@ -49,8 +51,12 @@ export const actions = {
       return Promise.reject(error)
     }
   },
-  logout({ commit }, isReload = true) {
-    commit('unsetAuthInfo')
+  async logout({ commit }, isReload = true, { data }) {
+    await this.$axios
+      .$post('http://localhost:4000/api/logout', data)
+      .then((response) => {
+        commit('unsetAuthInfo')
+      })
     if (isReload) location.reload()
   },
   setUser({ commit }, user) {
@@ -70,6 +76,6 @@ export const getters = {
     return state.loginState
   },
   getAuthUser(state) {
-    return localStorage.user
+    return state.user
   }
 }

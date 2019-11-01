@@ -12,7 +12,9 @@ export const mutations = {
 export const actions = {
   async heroList({ commit }) {
     await this.$axios
-      .$get('http://localhost:4000/api/hero')
+      .$get('http://localhost:4000/api/hero', {
+        data: {}
+      })
       .then((response) => {
         console.log('heroList', response)
         commit('setHeroList', response)
